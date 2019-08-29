@@ -8,11 +8,14 @@ Yet another Home Automation System.
 * To create "yet another home automation system"
   * Targeted to .NET Core
   * Leverage an Actor Framework (using Akka.Net)
+    * Micro-services, fault tolernate, scalability
+    * Messaging, cross machine comm, cross platform
+    * Extesibility via Actor model (versioning of each)
   * Hosting in docker by default, kubernetes, raspberrypi, linux, windows, macos, or bare metal...
   * 100% self contained (execution).  no other runtime dependancies
     * So this possibly means self-hosting the Web Server, MQTT, etc.
   * Possible heavy reliance on MQTT
-  * Dependency injection
+  * Dependency Injection
   * Should never have any limitations on scale
   * 100% UI managed.  Editing Yaml/Json config sucks bad
   * Start with Angular for the UI, but 100% must be mobile first (I could care less if its angular or react or whatever)
@@ -69,7 +72,7 @@ So for example, running an entire office or large home, all the way down to a sm
 * Extensible Configuration management 
 * NLP based interaction (bot all the things!)
     
-Each sensor, actuator and user, etc.. would be actors in the system.  
+Each sensor, actuator and user, etc.. would be actors in the system. 
 
 We could also scan the entire subnet and keep track of each device on the network, and their connectivity state (essentially treat them as sensors).  Wake on lan as an actuator?
 
@@ -115,28 +118,28 @@ We could also scan the entire subnet and keep track of each device on the networ
 ## Core Problems to address
 ---------------------------
 1. Setup project structure with the Akka.NET
-1. Get DI working within Akka.NET
+2. Get DI working within Akka.NET
     1. Setup CI/CD
-1. Configuration storage
-1. Telemetry storage
-1. Actor snapshot storage
-1. Design initial Actor framework (Coodinators/Managers, etc.)
-1. Seutp Akka.NET Clustering
-1. Docker support, including automated deployments to Rpi and Windows (docker and bare metal)
-1. Get a modern (kestrel) Web Server operational, and redundant/microservice setup within the Akka.Net method for microservices.
+3. Configuration storage
+4. Telemetry storage
+5. Actor snapshot storage
+6. Design initial Actor framework (Coodinators/Managers, etc.)
+7. Seutp Akka.NET Clustering
+8. Docker support, including automated deployments to Rpi and Windows (docker and bare metal)
+9. Get a modern (kestrel) Web Server operational, and redundant/microservice setup within the Akka.Net method for microservices.
     1. Basic controller
-    1. Basic WebSocket
-1. Get a basic library setup to manage core entities
+    2. Basic WebSocket
+10. Get a basic library setup to manage core entities
     1. Sensors, Actuators, Devices, Scenes
-1. A scheduling service
-1. A workflow / IFTTT service
-1. Start the Web/Reponsive UI
+11. A scheduling service
+12. A workflow / IFTTT service
+13. Start the Web/Reponsive UI
     1. Browse, Read, Edit, Add, Delete core entities
-    1. BREAD schedules
-    1. Trigger Actuators
-1. Basic Rpi Actor - temp sensor
-1. Basic Rpi Actor - GPIO relay
-1. Remote execution of a Actor / Actuator from the Web Head
+    2. BREAD schedules
+    3. Trigger Actuators
+14. Basic Rpi Actor - temp sensor
+15. Basic Rpi Actor - GPIO relay
+16. Remote execution of a Actor / Actuator from the Web Head
 
 
 ## Core Domain Model
@@ -187,7 +190,7 @@ We could also scan the entire subnet and keep track of each device on the networ
     * string username
     * string password
 
-## Core Mutation and Monitoring
+## Mutation and Sensor Monitoring
 ----------------------
 
 * IActuatorMutator
@@ -209,6 +212,8 @@ We could also scan the entire subnet and keep track of each device on the networ
 ## Actor Composition
 -------------------
 * *See https://petabridge.com/blog/top-akkadotnet-design-patterns/*
+* *https://petabridge.com/blog/when-should-I-use-actor-selection/*
+* *https://petabridge.com/blog/how-actors-recover-from-failure-hierarchy-and-supervision/*
 * Coordinators / Managers
 * **DeviceCoordinator**
   * *Child-per-Entity pattern*
