@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NeonTetra.Contracts.ActorSystem
 {
@@ -16,5 +17,7 @@ namespace NeonTetra.Contracts.ActorSystem
         object RootActor { get; }
 
         void Tell(object message, INeonActor sender = null);
+
+        Task<T> Ask<T>(object message, TimeSpan? timeout = null);
     }
 }

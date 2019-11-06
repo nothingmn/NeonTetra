@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeonTetra.Services.Serilog"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonTetra.Services.Akka", "NeonTetra.Services.Akka\NeonTetra.Services.Akka.csproj", "{59F5FEC5-EECA-482E-91EF-980BD35BED95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonTetraWebApi", "Hosting\NeonTetraWebApi\NeonTetraWebApi.csproj", "{D92D1129-80B7-4A03-B481-FA98A53C345A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{59F5FEC5-EECA-482E-91EF-980BD35BED95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59F5FEC5-EECA-482E-91EF-980BD35BED95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59F5FEC5-EECA-482E-91EF-980BD35BED95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D92D1129-80B7-4A03-B481-FA98A53C345A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D92D1129-80B7-4A03-B481-FA98A53C345A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D92D1129-80B7-4A03-B481-FA98A53C345A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D92D1129-80B7-4A03-B481-FA98A53C345A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{D875D782-0F51-4C0E-B956-BF998024920B} = {A6544FCF-A394-48F0-AE6E-F0C51E60849B}
 		{B32E524E-2287-4101-9896-98CCF5E331F1} = {C5592185-A785-4679-BD50-4BE7725544D8}
 		{59F5FEC5-EECA-482E-91EF-980BD35BED95} = {C5592185-A785-4679-BD50-4BE7725544D8}
+		{D92D1129-80B7-4A03-B481-FA98A53C345A} = {A6544FCF-A394-48F0-AE6E-F0C51E60849B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0DDB235A-44A2-4352-BCDA-362FCB34AB1C}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Akka.Actor;
 using Akka.Actor.Dsl;
 using Akka.DI.Core;
@@ -56,6 +57,11 @@ namespace NeonTetra.Services.Akka
             {
                 ActorRef.Tell(message);
             }
+        }
+
+        public async Task<T> Ask<T>(object message, TimeSpan? timeout = null)
+        {
+            return await ActorRef.Ask<T>(message, timeout);
         }
     }
 }
