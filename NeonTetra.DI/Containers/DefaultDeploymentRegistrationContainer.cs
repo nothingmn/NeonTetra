@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using NeonTetra.Services.Akka;
 
 namespace NeonTetra.DI.Containers
 {
@@ -51,8 +52,7 @@ namespace NeonTetra.DI.Containers
                     }
             }
 
-            container.Resolve<ILogFactory>()?.CreateLog("DefaultDeployment", "Start")
-                ?.Event("Startup Performance", null, metrics);
+            container.Resolve<ILogFactory>()?.CreateLog("DefaultDeployment", "Start")?.Event("Startup Performance", null, metrics);
         }
 
         public void Register(IDIContainer container)
@@ -62,12 +62,14 @@ namespace NeonTetra.DI.Containers
             new LoggingRegistrationContainer().Register(container);
             new CacheRegistrationContainer().Register(container);
             new ResourceCompilerRegistrationContainer().Register(container);
+            new AkkaRegistrationContainer().Register(container);
 
             container.Register<IPostRegistrationStep, DefaultDeploymentRegistrationContainer>("DefaultDeploymentRegistrationContainer");
             container.Register<IPostRegistrationStep, LoggingRegistrationContainer>("LoggingRegistrationContainer");
             container.Register<IPostRegistrationStep, ConfigurationRegistrationContainer>("ConfigurationRegistrationContainer");
             container.Register<IPostRegistrationStep, CacheRegistrationContainer>("CacheRegistrationContainer");
             container.Register<IPostRegistrationStep, ResourceCompilerRegistrationContainer>("ResourceCompilerRegistrationContainer");
+            container.Register<IPostRegistrationStep, AkkaRegistrationContainer>("AkkaRegistrationContainer");
         }
     }
 }

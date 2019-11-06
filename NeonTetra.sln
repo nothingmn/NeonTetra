@@ -12,15 +12,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosting", "Hosting", "{A6544FCF-A394-48F0-AE6E-F0C51E60849B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonTetra.DI", "NeonTetra.DI\NeonTetra.DI.csproj", "{B8184AC2-5060-4D8C-A327-F86C19BD81A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeonTetra.DI", "NeonTetra.DI\NeonTetra.DI.csproj", "{B8184AC2-5060-4D8C-A327-F86C19BD81A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonTetra.Contracts", "NeonTetra.Contracts\NeonTetra.Contracts.csproj", "{D242D17F-B759-4937-B23D-4ED2E97E0CCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeonTetra.Contracts", "NeonTetra.Contracts\NeonTetra.Contracts.csproj", "{D242D17F-B759-4937-B23D-4ED2E97E0CCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonTetra.Core", "NeonTetra.Core\NeonTetra.Core.csproj", "{09192F93-3A80-49E4-A43A-C5AB8E9B9CB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeonTetra.Core", "NeonTetra.Core\NeonTetra.Core.csproj", "{09192F93-3A80-49E4-A43A-C5AB8E9B9CB3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C5592185-A785-4679-BD50-4BE7725544D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonTetra.Services.Serilog", "Services\NeonTetra.Services.Serilog\NeonTetra.Services.Serilog.csproj", "{B32E524E-2287-4101-9896-98CCF5E331F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeonTetra.Services.Serilog", "Services\NeonTetra.Services.Serilog\NeonTetra.Services.Serilog.csproj", "{B32E524E-2287-4101-9896-98CCF5E331F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonTetra.Services.Akka", "NeonTetra.Services.Akka\NeonTetra.Services.Akka.csproj", "{59F5FEC5-EECA-482E-91EF-980BD35BED95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,10 @@ Global
 		{B32E524E-2287-4101-9896-98CCF5E331F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B32E524E-2287-4101-9896-98CCF5E331F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B32E524E-2287-4101-9896-98CCF5E331F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59F5FEC5-EECA-482E-91EF-980BD35BED95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59F5FEC5-EECA-482E-91EF-980BD35BED95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59F5FEC5-EECA-482E-91EF-980BD35BED95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59F5FEC5-EECA-482E-91EF-980BD35BED95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D875D782-0F51-4C0E-B956-BF998024920B} = {A6544FCF-A394-48F0-AE6E-F0C51E60849B}
 		{B32E524E-2287-4101-9896-98CCF5E331F1} = {C5592185-A785-4679-BD50-4BE7725544D8}
+		{59F5FEC5-EECA-482E-91EF-980BD35BED95} = {C5592185-A785-4679-BD50-4BE7725544D8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0DDB235A-44A2-4352-BCDA-362FCB34AB1C}

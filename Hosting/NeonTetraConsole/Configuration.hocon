@@ -1,0 +1,46 @@
+akka {
+    loglevel = DEBUG
+
+    #loggers = ["Akka.Logger.Serilog.SerilogLogger, Akka.Logger.Serilog"]
+
+
+    actor {
+    
+    #provider = "Akka.Cluster.ClusterActorRefProvider, Akka.Cluster"
+    #provider = cluster
+   
+    debug {
+    receive = on          #any received message
+    autoreceive = on      #automatically received messages
+    lifecycle = on        #actor lifecycle changes
+    event-stream = on     #subscription changes  for akka event stream
+    unhandled = on        #unhandled messages to event streams
+    }}
+  remote {
+    #helios.tcp {
+    #    port = 0
+    #    dns-use-ipv6 = false
+    #    #public-hostname = localhost
+    #    #hostname = localhost
+    #    enforce-ip-family = false
+    #}
+    log-remote-lifecycle-events = DEBUG
+    dot-netty.tcp {
+      transport-class = "Akka.Remote.Transport.DotNetty.TcpTransport, Akka.Remote"
+      applied-adapters = []
+      transport-protocol = tcp
+      #will be populated with a dynamic host-name at runtime if left uncommented
+      port = 0
+	  hostname = 0.0.0.0
+	  public-hostname = robsx1.chartier-family.com
+    }
+  }
+  cluster {
+    seed-nodes = ["akka.tcp://ConfigActorSystem@home.chartier-family.com:4053"]
+	allow-weakly-up-members : on
+	 roles : [seed]
+     debug : {
+       verbose-receive-gossip-logging : on
+     }
+  }
+}

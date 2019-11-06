@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NeonTetra.Contracts;
+using NeonTetra.Contracts.ActorSystem;
+using NeonTetra.Contracts.ActorSystem.Actors;
 using NeonTetra.Contracts.Infrastructure;
 using NeonTetra.Contracts.Infrastructure.Compression;
 using NeonTetra.Contracts.Logging;
@@ -36,6 +38,13 @@ namespace NeonTetraConsole
                         var compressed = cFactory.Compress(test, CompressionType.Gzip);
                         var uncompressed = cFactory.Decompress(compressed, CompressionType.Gzip);
                         log.Information("Compression Works:{0}", test.SequenceEqual(uncompressed));
+                        break;
+
+                    case "a":
+                        var actorManager = Deployment.Container.Resolve<IActorManager>();
+                        var loggingActor = actorManager.Create<ISimpleLoggingActor>("ISimpleLoggingActor1");
+                        loggingActor.Tell("Hello world");
+
                         break;
 
                     default:
