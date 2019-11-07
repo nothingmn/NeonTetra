@@ -21,8 +21,26 @@ namespace NeonTetra.Services.Akka
             _container = container;
         }
 
-        public INeonActor GetByPath(string path)
+        public async Task<INeonActor> GetByPath(string path)
         {
+            NeonActorWrapper actor = null;
+            var sel = _actorSystem.ActorSelection(path);
+            if (sel != null)
+            {
+                try
+                {
+                    var actorRef = await sel.ResolveOne(TimeSpan.FromSeconds(5));
+                    if (actorRef != null)
+                    {
+                        return new NeonActorWrapper(actorRef);
+                    }
+                }
+                catch
+                {
+                    //actor was not found, ignore
+                }
+            }
+
             return null;
         }
 

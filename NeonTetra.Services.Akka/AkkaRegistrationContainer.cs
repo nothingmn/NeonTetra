@@ -21,6 +21,7 @@ namespace NeonTetra.Services.Akka
             container.Register<SimpleLoggingActor, SimpleLoggingActor>();
             container.Register<ISimpleLoggingActor, SimpleLoggingActor>();
             container.Register<IEchoActor, EchoActor>();
+            container.Register<IUserActor, UserActor>();
             container.Register<IActorManager, AkkaActorManager>();
         }
 

@@ -41,14 +41,13 @@ namespace NeonTetraWebApi
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("default");
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute("default", "api/{controller=Home}/{action=Get}/{id?}");
             });
         }
     }

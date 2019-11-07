@@ -7,7 +7,7 @@ namespace NeonTetra.Contracts.ActorSystem
 {
     public interface IActorManager
     {
-        INeonActor GetByPath(string path);
+        Task<INeonActor> GetByPath(string path);
 
         INeonActor Create<T>(string id);
     }
