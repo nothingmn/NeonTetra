@@ -13,10 +13,14 @@ using NeonTetra.Core.Serialization;
 using NeonTetra.Core.Services;
 using Newtonsoft.Json;
 using System;
+using NeonTetra.Contracts.ActorSystem.Messages;
 using NeonTetra.Contracts.ActorSystem.Messages.Commands;
+using NeonTetra.Contracts.ActorSystem.Messages.Events;
 using NeonTetra.Contracts.Membership;
+using NeonTetra.Core.ActorSystem.Messages;
+using NeonTetra.Core.ActorSystem.Messages.Commands;
+using NeonTetra.Core.ActorSystem.Messages.Events;
 using NeonTetra.Core.Membership;
-using NeonTetra.Core.Messages.Commands;
 using JsonSerializer = NeonTetra.Core.Serialization.JsonSerializer;
 
 namespace NeonTetra.DI.Containers
@@ -78,9 +82,21 @@ namespace NeonTetra.DI.Containers
             container.Register<IDomainDataLoader, DomainDataLoader>();
             container.Register<IUserManager, UserManager>();
 
+            RegisterActorMessageTypes(container);
+        }
+
+        private void RegisterActorMessageTypes(IDIContainer container)
+        {
+            container.Register<ICommandToEventAdapter, CommandToEventAdapter>();
+
             //messages/commands/events
             container.Register<IQueryActorStateCommand, QueryActorStateCommand>();
+            container.Register<IRespondActorStateEvent, RespondActorStateEvent>();
             container.Register<IUpdateUserActorStateCommand, UpdateUserActorStateCommand>();
+
+            container.Register<IRequestTrackUserCommand, RequestTrackUserCommand>();
+            container.Register<IUserTrackingEvent, UserTrackingEvent>();
+            container.Register<IUserUpdatedEvent, UserUpdatedEvent>();
         }
     }
 }

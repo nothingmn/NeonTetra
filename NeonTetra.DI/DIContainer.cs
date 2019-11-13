@@ -221,11 +221,11 @@ namespace NeonTetra.DI
 
         private void Initialize(IContainer internalContainer)
         {
-            var verify = false;
+            //var verify = false;
             if (internalContainer == null)
             {
                 internalContainer = new Container(Configure);
-                verify = true;
+                //verify = true;
             }
 
             if (Assemblies == null) Assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();

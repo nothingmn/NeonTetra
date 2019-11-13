@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using NeonTetra.Contracts.ActorSystem.Messages.Commands;
 using NeonTetra.Contracts.Membership;
 
-namespace NeonTetra.Core.Messages.Commands
+namespace NeonTetra.Core.ActorSystem.Messages.Commands
 {
-    public class UpdateUserActorStateCommand : IUpdateUserActorStateCommand
+    public class UpdateUserActorStateCommand : Message, IUpdateUserActorStateCommand
     {
         public IUser UpdatedUser { get; set; }
     }

@@ -435,7 +435,7 @@ namespace NeonTetra.Core.Configuration
                         EntryPoint = file.Name;
                     }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //swallow, defaults to cmd above.
                 }

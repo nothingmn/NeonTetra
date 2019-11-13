@@ -18,8 +18,4 @@
     <ProjectReference Include="..\NeonTetra.Contracts\NeonTetra.Contracts.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Messages\Events\" />
-  </ItemGroup>
-
 </Project>

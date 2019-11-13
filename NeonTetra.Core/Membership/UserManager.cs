@@ -21,7 +21,7 @@ namespace NeonTetra.Core.Membership
 
         public async Task<IUser> Get(string id)
         {
-            var user = await GetOrCreateActor(id);
+            var user = await GetOrCreateActor<IUserActor>(id);
             if (user != null)
             {
                 var request = _resolver.Resolve<IQueryActorStateCommand>();
@@ -35,9 +35,9 @@ namespace NeonTetra.Core.Membership
             return $"user-{id}";
         }
 
-        private async Task<INeonActor> GetOrCreateActor(string id)
+        private async Task<INeonActor> GetOrCreateActor<T>(string id)
         {
-            var user = await _actorManager.GetByPath(FormatActorName(id));
+            var user = await _actorManager.GetByPath<T>(FormatActorName(id));
             if (user == null)
             {
                 user = _actorManager.Create<IUserActor>(FormatActorName(id));

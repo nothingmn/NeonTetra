@@ -21,7 +21,7 @@ namespace NeonTetra.Services.Akka
             _container = container;
         }
 
-        public async Task<INeonActor> GetByPath(string path)
+        public async Task<INeonActor> GetByPath<T>(string path)
         {
             NeonActorWrapper actor = null;
             var sel = _actorSystem.ActorSelection(path);
@@ -29,6 +29,7 @@ namespace NeonTetra.Services.Akka
             {
                 try
                 {
+                    var x = _actorSystem.ActorOf(_actorSystem.DI().Props(typeof(T)), path);
                     var actorRef = await sel.ResolveOne(TimeSpan.FromSeconds(5));
                     if (actorRef != null)
                     {
