@@ -13,17 +13,14 @@ namespace NeonTetra.Services.Akka
     public class AkkaActorManager : IActorManager
     {
         private readonly ActorSystem _actorSystem;
-        private readonly IDIContainer _container;
 
-        public AkkaActorManager(ActorSystem actorSystem, IDIContainer container)
+        public AkkaActorManager(ActorSystem actorSystem)
         {
             _actorSystem = actorSystem;
-            _container = container;
         }
 
         public async Task<INeonActor> GetByPath<T>(string path)
         {
-            NeonActorWrapper actor = null;
             var sel = _actorSystem.ActorSelection(path);
             if (sel != null)
             {
@@ -56,7 +53,7 @@ namespace NeonTetra.Services.Akka
     {
         public IActorRef ActorRef { get; }
 
-        public object RootActor
+        public object ActorReference
         {
             get { return ActorRef; }
         }
@@ -66,11 +63,16 @@ namespace NeonTetra.Services.Akka
             ActorRef = actorRef;
         }
 
+        public void Forward(object message)
+        {
+            ActorRef.Forward(message);
+        }
+
         public void Tell(object message, INeonActor sender = null)
         {
-            if (sender != null && sender.RootActor != null)
+            if (sender != null && sender.ActorReference != null)
             {
-                ActorRef.Tell(message, sender.RootActor as IActorRef);
+                ActorRef.Tell(message, sender.ActorReference as IActorRef);
             }
             else
             {

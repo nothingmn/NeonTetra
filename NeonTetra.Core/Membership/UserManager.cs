@@ -10,45 +10,20 @@ namespace NeonTetra.Core.Membership
 {
     public class UserManager : IUserManager
     {
-        private readonly IActorManager _actorManager;
-        private readonly IResolve _resolver;
+        private readonly IUserManagerActor _actorManager;
 
-        public UserManager(IActorManager actorManager, IResolve resolver)
+        public UserManager(IUserManagerActor actorManager)
         {
             _actorManager = actorManager;
-            _resolver = resolver;
         }
 
         public async Task<IUser> Get(string id)
         {
-            var user = await GetOrCreateActor<IUserActor>(id);
-            if (user != null)
-            {
-                var request = _resolver.Resolve<IQueryActorStateCommand>();
-                return await user.Ask<IUser>(request);
-            }
-            return null;
         }
 
         private string FormatActorName(string id)
         {
             return $"user-{id}";
-        }
-
-        private async Task<INeonActor> GetOrCreateActor<T>(string id)
-        {
-            var user = await _actorManager.GetByPath<T>(FormatActorName(id));
-            if (user == null)
-            {
-                user = _actorManager.Create<IUserActor>(FormatActorName(id));
-            }
-
-            return user;
-        }
-
-        public Task Create(IUser user)
-        {
-            return null;
         }
     }
 }

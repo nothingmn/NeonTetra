@@ -14,10 +14,12 @@ namespace NeonTetra.Contracts.ActorSystem
 
     public interface INeonActor
     {
-        object RootActor { get; }
+        object ActorReference { get; }
 
         void Tell(object message, INeonActor sender = null);
 
         Task<T> Ask<T>(object message, TimeSpan? timeout = null);
+
+        void Forward(object message);
     }
 }
