@@ -40,13 +40,6 @@ namespace NeonTetraConsole
                         log.Information("Compression Works:{0}", test.SequenceEqual(uncompressed));
                         break;
 
-                    case "a":
-                        var actorManager = Deployment.Container.Resolve<IActorManager>();
-                        var loggingActor = actorManager.Create<ISimpleLoggingActor>("ISimpleLoggingActor1");
-                        loggingActor.Tell("Hello world");
-
-                        break;
-
                     default:
                         break;
                 }

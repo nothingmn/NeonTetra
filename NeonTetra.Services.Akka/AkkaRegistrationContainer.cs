@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Akka.Actor;
 using Akka.DI.Core;
 using NeonTetra.Contracts;
 using NeonTetra.Contracts.ActorSystem;
 using NeonTetra.Contracts.ActorSystem.Actors;
+using NeonTetra.Contracts.ActorSystem.Messages;
 using NeonTetra.Contracts.Configuration;
 using NeonTetra.Contracts.Infrastructure;
+using NeonTetra.Contracts.Membership;
 using NeonTetra.Services.Akka.Actors;
 
 namespace NeonTetra.Services.Akka
@@ -17,12 +20,9 @@ namespace NeonTetra.Services.Akka
     {
         public void Register(IDIContainer container)
         {
-            container.Register<NeonActorWrapper, NeonActorWrapper>();
-            container.Register<SimpleLoggingActor, SimpleLoggingActor>();
-            container.Register<ISimpleLoggingActor, SimpleLoggingActor>();
-            container.Register<IEchoActor, EchoActor>();
             container.Register<IUserActor, UserActor>();
-            container.Register<IActorManager, AkkaActorManager>();
+            container.Register<IUserManager, AkkaUserManager>();
+            container.RegisterSingleton<IUserManagerActor, UserManagerActor>();
         }
 
         public Task ExecutePostRegistrationStep(IDIContainer container, CancellationToken cancellationToken = default(CancellationToken))
@@ -36,6 +36,10 @@ namespace NeonTetra.Services.Akka
             container.RegisterInstance(resolver, typeof(IDependencyResolver));
             container.RegisterInstance(actorCore);
             container.RegisterInstance(actorCore.RootActorSystem);
+
+            var _userManagerActorRef = actorCore.RootActorSystem.ActorOf(actorCore.RootActorSystem.DI().Props(typeof(IUserManagerActor)), "UserManagerActor");
+            container.RegisterInstance(_userManagerActorRef, "UserManagerActor");
+
             return Task.CompletedTask;
         }
     }

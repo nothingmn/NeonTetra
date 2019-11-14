@@ -80,7 +80,7 @@ namespace NeonTetra.DI.Containers
             container.Register<IFeatureFlagProvider, ConfigurationBasedFeatureFlagProvider>();
 
             container.Register<IDomainDataLoader, DomainDataLoader>();
-            container.Register<IUserManager, UserManager>();
+            container.Register<IUser, User>();
 
             RegisterActorMessageTypes(container);
         }
@@ -90,7 +90,6 @@ namespace NeonTetra.DI.Containers
             container.Register<ICommandToEventAdapter, CommandToEventAdapter>();
 
             //messages/commands/events
-            container.Register<IQueryActorStateCommand, QueryActorStateCommand>();
             container.Register<IRespondActorStateEvent, RespondActorStateEvent>();
             container.Register<IUpdateUserActorStateCommand, UpdateUserActorStateCommand>();
 

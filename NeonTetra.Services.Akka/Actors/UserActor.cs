@@ -15,21 +15,17 @@ namespace NeonTetra.Services.Akka.Actors
     public class UserActor : ReceiveActor, IUserActor
     {
         private readonly ICommandToEventAdapter _commandToEventAdapter;
+        private readonly IResolve _resolver;
         private readonly ILog _logger;
 
         private IUser _user;
 
-        public UserActor(ILogFactory logFactory, ICommandToEventAdapter commandToEventAdapter)
+        public UserActor(ILogFactory logFactory, ICommandToEventAdapter commandToEventAdapter, IResolve resolver)
         {
+            _user = resolver.Resolve<IUser>();
             _commandToEventAdapter = commandToEventAdapter;
+            _resolver = resolver;
             _logger = logFactory.CreateLog();
-
-            Receive<IQueryActorStateCommand>(msg =>
-            {
-                var response = _commandToEventAdapter.Adapt<IQueryActorStateCommand, IRespondActorStateEvent>(msg);
-                response.User = _user;
-                Sender.Tell(response);
-            });
 
             Receive<IUpdateUserActorStateCommand>(cmd =>
             {
@@ -39,7 +35,14 @@ namespace NeonTetra.Services.Akka.Actors
 
             Receive<IRequestTrackUserCommand>(trackuserCommand =>
             {
-                Sender.Tell(_commandToEventAdapter.Adapt<IRequestTrackUserCommand, IUserTrackingEvent>(trackuserCommand));
+                if (string.IsNullOrEmpty(_user.Id))
+                {
+                    _user.Id = trackuserCommand.UserId;
+                }
+                var response = _commandToEventAdapter.Adapt<IRequestTrackUserCommand, IRespondActorStateEvent>(trackuserCommand);
+                response.User = _user;
+                Sender.Tell(response);
+                //Sender.Tell(_commandToEventAdapter.Adapt<IRequestTrackUserCommand, IUserTrackingEvent>(trackuserCommand));
             });
         }
 
