@@ -96,6 +96,9 @@ namespace NeonTetra.DI.Containers
             container.Register<IRequestTrackUserCommand, RequestTrackUserCommand>();
             container.Register<IUserTrackingEvent, UserTrackingEvent>();
             container.Register<IUserUpdatedEvent, UserUpdatedEvent>();
+
+            container.Register<IRequestUserLoginCommand, RequestUserLoginCommand>();
+            container.Register<IRespondUserLoginEvent, RespondUserLoginEvent>();
         }
     }
 }

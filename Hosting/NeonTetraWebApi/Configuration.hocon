@@ -7,7 +7,7 @@ akka {
     actor {
     
     #provider = "Akka.Cluster.ClusterActorRefProvider, Akka.Cluster"
-    #provider = cluster
+    provider = cluster
    
     debug {
     receive = on          #any received message
@@ -17,13 +17,13 @@ akka {
     unhandled = on        #unhandled messages to event streams
     }}
   remote {
-    #helios.tcp {
-    #    port = 0
-    #    dns-use-ipv6 = false
-    #    #public-hostname = localhost
-    #    #hostname = localhost
-    #    enforce-ip-family = false
-    #}
+    helios.tcp {
+        port = 0
+        dns-use-ipv6 = false
+        #public-hostname = localhost
+        #hostname = localhost
+        enforce-ip-family = false
+    }
     log-remote-lifecycle-events = DEBUG
     dot-netty.tcp {
       transport-class = "Akka.Remote.Transport.DotNetty.TcpTransport, Akka.Remote"

@@ -25,11 +25,11 @@ namespace NeonTetra.Services.Akka
             container.RegisterSingleton<IUserManagerActor, UserManagerActor>();
         }
 
-        public Task ExecutePostRegistrationStep(IDIContainer container, CancellationToken cancellationToken = default(CancellationToken))
+        public Task ExecutePostRegistrationStep(IDIContainer container, CancellationToken cancellationToken)
         {
             var config = container.Resolve<IConfiguration>();
             var actorSystemName = config.GetValueOrDefault("Actor:System:Name", "NeonTetra");
-            var actorCore = new ActorSystemCore(container, actorSystemName);
+            var actorCore = new ActorSystemCore(actorSystemName);
             var resolver = new NeonTetraDIBridge(container, actorCore);
             actorCore.RootActorSystem.AddDependencyResolver(resolver);
 

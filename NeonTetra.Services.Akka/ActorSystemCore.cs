@@ -9,13 +9,11 @@ namespace NeonTetra.Services.Akka
 {
     public class ActorSystemCore : IDisposable
     {
-        private readonly IDIContainer _container;
         private readonly string _name;
         public ActorSystem RootActorSystem { get; }
 
-        public ActorSystemCore(IDIContainer container, string name = "MyActorSystem")
+        public ActorSystemCore(string name = "MyActorSystem")
         {
-            _container = container;
             _name = name;
             var configManager = new ActorSystemConfiguration();
             var config = configManager.LoadHoconConfigPriority(_name);

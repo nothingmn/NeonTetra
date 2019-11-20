@@ -30,5 +30,15 @@ namespace NeonTetra.Services.Akka
             var result = await _userManagerActorRef.Ask<IRespondActorStateEvent>(msg);
             return result?.User;
         }
+
+        public Task<IUser> Login(string username, string password)
+        {
+            return Task.FromResult(default(IUser));
+        }
+
+        public Task<IUser> Logout(string id)
+        {
+            return Task.FromResult(default(IUser));
+        }
     }
 }
