@@ -54,7 +54,7 @@ namespace NeonTetraWebApi
             var diContainer = new NeonTetra.DI.DIContainer(container);
             var manager = new ConfigurationDeploymentManager();
             diContainer.Register<NeonTetraJobActivator, NeonTetraJobActivator>();
-
+            diContainer.InjectRegistrationModule(typeof(WebRegistrationContainer));
             return await manager.Start(diContainer, new Dictionary<string, object>
             {
                 {"host", typeof(Program).FullName},

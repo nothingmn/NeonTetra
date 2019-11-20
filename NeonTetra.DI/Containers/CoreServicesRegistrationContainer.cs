@@ -16,10 +16,12 @@ using System;
 using NeonTetra.Contracts.ActorSystem.Messages;
 using NeonTetra.Contracts.ActorSystem.Messages.Commands;
 using NeonTetra.Contracts.ActorSystem.Messages.Events;
+using NeonTetra.Contracts.Jobs;
 using NeonTetra.Contracts.Membership;
 using NeonTetra.Core.ActorSystem.Messages;
 using NeonTetra.Core.ActorSystem.Messages.Commands;
 using NeonTetra.Core.ActorSystem.Messages.Events;
+using NeonTetra.Core.Jobs;
 using NeonTetra.Core.Membership;
 using JsonSerializer = NeonTetra.Core.Serialization.JsonSerializer;
 
@@ -83,6 +85,13 @@ namespace NeonTetra.DI.Containers
             container.Register<IUser, User>();
 
             RegisterActorMessageTypes(container);
+            RegisterJobs(container);
+        }
+
+        private void RegisterJobs(IDIContainer container)
+        {
+            container.Register<ILoggingJob, LoggingJob>();
+            container.Register<LoggingJob, LoggingJob>();
         }
 
         private void RegisterActorMessageTypes(IDIContainer container)

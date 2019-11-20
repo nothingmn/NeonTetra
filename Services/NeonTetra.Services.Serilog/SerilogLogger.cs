@@ -45,6 +45,15 @@ namespace NeonTetra.Services.Serilog
             {
                 _configuration = resolver.Resolve<IConfiguration>();
 
+                if (_configuration.GetValue<bool>("Logging:Seq:Enabled"))
+                {
+                    var host = _configuration.GetValue<string>("Logging:Seq:Host");
+                    if (!string.IsNullOrEmpty(host))
+                    {
+                        loggerConfiguration.WriteTo.Seq(host);
+                    }
+                }
+
                 if (_configuration.DebugMode)
                 {
                     loggerConfiguration.WriteTo.Debug();

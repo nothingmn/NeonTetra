@@ -72,7 +72,6 @@ namespace NeonTetraWebApi
 
             // Add the processing server as IHostedService
             services.AddHangfireServer();
-
             services.AddControllers();
         }
 
