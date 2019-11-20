@@ -1,15 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using DryIoc;
 using DryIoc.Microsoft.DependencyInjection;
+using Hangfire;
+using Hangfire.MySql.Core;
+using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NeonTetra.Contracts;
 using NeonTetra.Contracts.Infrastructure;
+using NeonTetra.Core.Configuration;
+using NeonTetraWebApi.Hangfire;
 
 namespace NeonTetraWebApi
 {
@@ -20,17 +27,25 @@ namespace NeonTetraWebApi
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .UseServiceProviderFactory(new DryIocServiceProviderFactory())
-                .ConfigureContainer<Container>((hostContext, container) =>
-                {
-                    Deployment = InitializeApplication(container).Result;
-                })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            var iocProviderFatory = new DryIocServiceProviderFactory();
+
+            Startup.JobActivator = new NeonTetraJobActivator();
+            var hostBuilder = Host.CreateDefaultBuilder(args)
+                    .UseServiceProviderFactory(iocProviderFatory)
+                    .ConfigureWebHostDefaults(webBuilder =>
+                    {
+                        var webHostBuilder = webBuilder.UseStartup<Startup>();
+                    })
+                    .ConfigureContainer<Container>((hostContext, container) =>
+                    {
+                        Deployment = InitializeApplication(container).Result;
+                        (Startup.JobActivator as NeonTetraJobActivator).Resolver = Deployment.Container;
+                    })
+                ;
+            return hostBuilder;
+        }
 
         private static IDeployment Deployment { get; set; }
 
@@ -38,6 +53,8 @@ namespace NeonTetraWebApi
         {
             var diContainer = new NeonTetra.DI.DIContainer(container);
             var manager = new ConfigurationDeploymentManager();
+            diContainer.Register<NeonTetraJobActivator, NeonTetraJobActivator>();
+
             return await manager.Start(diContainer, new Dictionary<string, object>
             {
                 {"host", typeof(Program).FullName},
