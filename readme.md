@@ -6,24 +6,24 @@ Yet another Home Automation System.
 ## Goals and Objectives
 --------------------
 * To create "yet another home automation system"
-  * Targeted to .NET Core
-  * Leverage an Actor Framework (using Akka.Net)
-    * Micro-services, fault tolernate, scalability
-    * Messaging, cross machine comm, cross platform
-    * Extesibility via Actor model (versioning of each)
+  * Targeted to .NET Core  (done)
+  * Leverage an Actor Framework (using Akka.Net)    (done)
+    * Micro-services, fault tolernate, scalability   (done)
+    * Messaging, cross machine comm, cross platform    (done)
+    * Extesibility via Actor model (versioning of each)    (done)
   * Hosting in docker by default, kubernetes, raspberrypi, linux, windows, macos, or bare metal...
-  * 100% self contained (execution).  no other runtime dependancies
+  * 100% self contained (execution).  no other runtime dependancies   (mysql)
     * So this possibly means self-hosting the Web Server, MQTT, etc.
   * Possible heavy reliance on MQTT
-  * Dependency Injection
-  * Should never have any limitations on scale
+  * Dependency Injection    (done)
+  * Should never have any limitations on scale    (done)
   * 100% UI managed.  Editing Yaml/Json config sucks bad
   * Start with Angular for the UI, but 100% must be mobile first (I could care less if its angular or react or whatever)
   * "Proper" REST API for Client UI
   * Secure by default (2FA?)
   * I would like to avoid any sort of Entity Framework (probably just my personal bias against it)
-  * 100% Open Source  (not required)
-  * VS.NET 2017, 2019 and VS Code supported
+  * 100% Open Source  (not required)    (done)
+  * VS.NET 2017, 2019 and VS Code supported  
   * Scheduled and Automatic updates from github
     * Can be turned off
   * Sensor reporting/trend data
@@ -37,7 +37,7 @@ So for example, running an entire office or large home, all the way down to a sm
 
 ## Major built in components
 -------------------------
-* Scheduler  (extensible)
+* Scheduler  (extensible)    (done)
 * IFTTT like behavior
   * Sensor to control actuator
   * sensor to control groups, or scenes
