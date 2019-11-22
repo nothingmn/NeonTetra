@@ -26,7 +26,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeonTetra.Services.Akka", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeonTetraWebApi", "Hosting\NeonTetraWebApi\NeonTetraWebApi.csproj", "{D92D1129-80B7-4A03-B481-FA98A53C345A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonTetra.Services.MqttServer", "Services\NeonTetra.Services.MqttServer\NeonTetra.Services.MqttServer.csproj", "{3B10A210-F428-4E22-8BE6-119F928FC285}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeonTetra.Services.MqttServer", "Services\NeonTetra.Services.MqttServer\NeonTetra.Services.MqttServer.csproj", "{3B10A210-F428-4E22-8BE6-119F928FC285}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonTetra.Services.SunriseSunset", "Services\NeonTetra.Services.SunriseSunset\NeonTetra.Services.SunriseSunset.csproj", "{5251CA8E-BB2F-4627-90B8-B86B66B2328A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +68,10 @@ Global
 		{3B10A210-F428-4E22-8BE6-119F928FC285}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B10A210-F428-4E22-8BE6-119F928FC285}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B10A210-F428-4E22-8BE6-119F928FC285}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5251CA8E-BB2F-4627-90B8-B86B66B2328A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5251CA8E-BB2F-4627-90B8-B86B66B2328A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5251CA8E-BB2F-4627-90B8-B86B66B2328A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5251CA8E-BB2F-4627-90B8-B86B66B2328A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{59F5FEC5-EECA-482E-91EF-980BD35BED95} = {C5592185-A785-4679-BD50-4BE7725544D8}
 		{D92D1129-80B7-4A03-B481-FA98A53C345A} = {A6544FCF-A394-48F0-AE6E-F0C51E60849B}
 		{3B10A210-F428-4E22-8BE6-119F928FC285} = {C5592185-A785-4679-BD50-4BE7725544D8}
+		{5251CA8E-BB2F-4627-90B8-B86B66B2328A} = {C5592185-A785-4679-BD50-4BE7725544D8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0DDB235A-44A2-4352-BCDA-362FCB34AB1C}

@@ -35,7 +35,7 @@ namespace NeonTetra.DI.Containers
             container.RegisterInstance(container, typeof(IDIContainer));
             container.RegisterInstance(container, typeof(IRegister));
             container.RegisterInstance(container, typeof(IResolve));
-
+            container.RegisterSingleton<IServer, Server>();
             container.Register<ISerializerFactory, SerializerFactory>();
 
             container.Register<ISerialize, JsonSerializer>();
