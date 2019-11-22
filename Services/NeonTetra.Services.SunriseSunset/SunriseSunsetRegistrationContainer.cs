@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NeonTetra.Contracts;
 using NeonTetra.Contracts.Configuration;
 using NeonTetra.Contracts.Infrastructure;
+using NeonTetra.Contracts.Jobs;
 using NeonTetra.Contracts.Services;
 
 namespace NeonTetra.Services.SunriseSunset
@@ -29,6 +30,15 @@ namespace NeonTetra.Services.SunriseSunset
                 var ss = container.Resolve<ISunriseSunset>();
                 server.Sunrise = ss.GetSunrise(server.Lat, server.Lon);
                 server.Sunrset = ss.GetSunset(server.Lat, server.Lon);
+            }
+
+            if (container.IsRegistered<IScheduler>())
+            {
+                var scheduler = container.Resolve<IScheduler>();
+                var updateJob = container.Resolve<IUpdateServerPropertiesJob>();
+                var cron = container.Resolve<ICronExpressions>();
+
+                scheduler.RecurringJobAddOrUpdate(() => updateJob.UpdateServerProperties(), cron.Daily(12), TimeZoneInfo.Local);
             }
 
             return Task.CompletedTask;

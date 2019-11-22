@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 using NeonTetra.Contracts;
 using NeonTetra.Contracts.Infrastructure;
 using NeonTetra.Core.Configuration;
-using NeonTetraWebApi.Hangfire;
+using NeonTetraWebApi.Scheduling;
 
 namespace NeonTetraWebApi
 {

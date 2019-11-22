@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Hangfire;
 using NeonTetra.Contracts;
 
-namespace NeonTetraWebApi.Hangfire
+namespace NeonTetraWebApi.Scheduling
 {
     public class NeonTetraJobActivator : JobActivator
     {

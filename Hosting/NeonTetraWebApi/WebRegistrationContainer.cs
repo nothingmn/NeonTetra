@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NeonTetra.Contracts;
 using NeonTetra.Contracts.Infrastructure;
 using NeonTetra.Contracts.Services;
-using NeonTetraWebApi.Hangfire;
+using NeonTetraWebApi.Scheduling;
 
 namespace NeonTetraWebApi
 {
@@ -15,10 +15,10 @@ namespace NeonTetraWebApi
         public void Register(IDIContainer container)
         {
             container.Register<IScheduler, BasicHangfireScheduler>();
+            container.Register<ICronExpressions, HangFireCronProvider>();
         }
 
-        public Task ExecutePostRegistrationStep(IDIContainer container,
-            CancellationToken cancellationToken = default(CancellationToken))
+        public Task ExecutePostRegistrationStep(IDIContainer container, CancellationToken cancellationToken = default(CancellationToken))
         {
             return null;
         }

@@ -13,8 +13,8 @@ Yet another Home Automation System.
     * Extesibility via Actor model (versioning of each)    (done)
   * Hosting in docker by default, kubernetes, raspberrypi, linux, windows, macos, or bare metal...
   * 100% self contained (execution).  no other runtime dependancies   (mysql)
-    * So this possibly means self-hosting the Web Server, MQTT, etc.
-  * Possible heavy reliance on MQTT
+    * So this possibly means self-hosting the Web Server, MQTT, etc.    (mqtt done)
+  * Possible heavy reliance on MQTT    (done)
   * Dependency Injection    (done)
   * Should never have any limitations on scale    (done)
   * 100% UI managed.  Editing Yaml/Json config sucks bad
@@ -48,7 +48,7 @@ So for example, running an entire office or large home, all the way down to a sm
   * All configuration
 * 3rd party integrations  (extensible)
   * Weather  (extensible)
-  * Sunrise/sunset  (extensible)
+  * Sunrise/sunset  (extensible)    (done)
   * Twilio / Pushbullet
   * Slack
   * Alexa / Google Home

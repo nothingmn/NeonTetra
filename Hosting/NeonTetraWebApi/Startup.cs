@@ -18,7 +18,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NeonTetra.Contracts;
 using NeonTetra.Contracts.Infrastructure;
-using NeonTetraWebApi.Hangfire;
 
 namespace NeonTetraWebApi
 {
@@ -38,40 +37,33 @@ namespace NeonTetraWebApi
         {
             var connectionString = Configuration.GetConnectionString("Hangfire");
 
+            Hangfire.JobStorage.Current =
+                new MySqlStorage(
+                    connectionString,
+                    new MySqlStorageOptions
+                    {
+                        TransactionIsolationLevel = IsolationLevel.ReadCommitted,
+                        QueuePollInterval = TimeSpan.FromSeconds(15),
+                        JobExpirationCheckInterval = TimeSpan.FromHours(1),
+                        CountersAggregateInterval = TimeSpan.FromMinutes(5),
+                        PrepareSchemaIfNecessary = true,
+                        DashboardJobListLimit = 50000,
+                        TransactionTimeout = TimeSpan.FromMinutes(1),
+                        TablePrefix = "Hangfire"
+                    });
+
             // Add Hangfire services.
             services.AddHangfire(configuration => configuration
                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseRecommendedSerializerSettings()
                 .UseActivator(Startup.JobActivator)
-                .UseStorage(
-                    new MySqlStorage(
-                        connectionString,
-                        new MySqlStorageOptions
-                        {
-                            TransactionIsolationLevel = IsolationLevel.ReadCommitted,
-                            QueuePollInterval = TimeSpan.FromSeconds(15),
-                            JobExpirationCheckInterval = TimeSpan.FromHours(1),
-                            CountersAggregateInterval = TimeSpan.FromMinutes(5),
-                            PrepareSchemaIfNecessary = true,
-                            DashboardJobListLimit = 50000,
-                            TransactionTimeout = TimeSpan.FromMinutes(1),
-                            TablePrefix = "Hangfire"
-                        })
-                    )
-            //.UseSqlServerStorage(Configuration.GetConnectionString("HangfireConnection"), new SqlServerStorageOptions
-            //{
-            //    CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-            //    SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-            //    QueuePollInterval = TimeSpan.Zero,
-            //    UseRecommendedIsolationLevel = true,
-            //    UsePageLocksOnDequeue = true,
-            //    DisableGlobalLocks = true
-            //})
-            );
+                .UseStorage(Hangfire.JobStorage.Current)
+                );
 
             // Add the processing server as IHostedService
             services.AddHangfireServer();
+
             services.AddControllers();
         }
 

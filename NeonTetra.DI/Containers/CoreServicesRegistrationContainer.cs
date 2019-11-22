@@ -96,6 +96,8 @@ namespace NeonTetra.DI.Containers
         {
             container.Register<ILoggingJob, LoggingJob>();
             container.Register<LoggingJob, LoggingJob>();
+            container.Register<IUpdateServerPropertiesJob, UpdateServerPropertiesJob>();
+            container.Register<UpdateServerPropertiesJob, UpdateServerPropertiesJob>();
         }
 
         private void RegisterActorMessageTypes(IDIContainer container)
