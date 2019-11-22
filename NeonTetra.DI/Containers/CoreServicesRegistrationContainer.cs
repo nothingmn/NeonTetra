@@ -21,6 +21,7 @@ using NeonTetra.Contracts.Membership;
 using NeonTetra.Core.ActorSystem.Messages;
 using NeonTetra.Core.ActorSystem.Messages.Commands;
 using NeonTetra.Core.ActorSystem.Messages.Events;
+using NeonTetra.Core.Hash;
 using NeonTetra.Core.Jobs;
 using NeonTetra.Core.Membership;
 using JsonSerializer = NeonTetra.Core.Serialization.JsonSerializer;
@@ -83,6 +84,9 @@ namespace NeonTetra.DI.Containers
 
             container.Register<IDomainDataLoader, DomainDataLoader>();
             container.Register<IUser, User>();
+            container.Register<IHashProvider, Murmur3>("MURMUR3");
+            container.Register<IHashProvider, MD5Hash>("MD5");
+            container.Register<IHashProvider, Murmur3>();
 
             RegisterActorMessageTypes(container);
             RegisterJobs(container);

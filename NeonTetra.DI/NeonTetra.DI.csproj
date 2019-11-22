@@ -13,6 +13,7 @@
     <ProjectReference Include="..\NeonTetra.Contracts\NeonTetra.Contracts.csproj" />
     <ProjectReference Include="..\NeonTetra.Core\NeonTetra.Core.csproj" />
     <ProjectReference Include="..\NeonTetra.Services.Akka\NeonTetra.Services.Akka.csproj" />
+    <ProjectReference Include="..\Services\NeonTetra.Services.MqttServer\NeonTetra.Services.MqttServer.csproj" />
     <ProjectReference Include="..\Services\NeonTetra.Services.Serilog\NeonTetra.Services.Serilog.csproj" />
   </ItemGroup>
 

@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using NeonTetra.Services.Akka;
+using NeonTetra.Services.MqttServer;
 
 namespace NeonTetra.DI.Containers
 {
@@ -63,6 +64,7 @@ namespace NeonTetra.DI.Containers
             new CacheRegistrationContainer().Register(container);
             new ResourceCompilerRegistrationContainer().Register(container);
             new AkkaRegistrationContainer().Register(container);
+            new MqttBrokerRegistrationContainer().Register(container);
 
             container.Register<IPostRegistrationStep, DefaultDeploymentRegistrationContainer>("DefaultDeploymentRegistrationContainer");
             container.Register<IPostRegistrationStep, LoggingRegistrationContainer>("LoggingRegistrationContainer");
@@ -70,6 +72,7 @@ namespace NeonTetra.DI.Containers
             container.Register<IPostRegistrationStep, CacheRegistrationContainer>("CacheRegistrationContainer");
             container.Register<IPostRegistrationStep, ResourceCompilerRegistrationContainer>("ResourceCompilerRegistrationContainer");
             container.Register<IPostRegistrationStep, AkkaRegistrationContainer>("AkkaRegistrationContainer");
+            container.Register<IPostRegistrationStep, MqttBrokerRegistrationContainer>("MqttBrokerRegistrationContainer");
         }
     }
 }
