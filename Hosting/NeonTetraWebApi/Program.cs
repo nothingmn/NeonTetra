@@ -40,14 +40,12 @@ namespace NeonTetraWebApi
                     })
                     .ConfigureContainer<Container>((hostContext, container) =>
                     {
-                        Deployment = InitializeApplication(container).Result;
-                        (Startup.JobActivator as NeonTetraJobActivator).Resolver = Deployment.Container;
+                        Startup.Deployment = InitializeApplication(container).Result;
+                        (Startup.JobActivator as NeonTetraJobActivator).Resolver = Startup.Deployment.Container;
                     })
                 ;
             return hostBuilder;
         }
-
-        private static IDeployment Deployment { get; set; }
 
         private static async Task<IDeployment> InitializeApplication(IContainer container)
         {

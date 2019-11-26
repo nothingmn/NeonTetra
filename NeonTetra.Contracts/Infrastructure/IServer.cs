@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using NeonTetra.Contracts.Services;
 
 namespace NeonTetra.Contracts.Infrastructure
 {
@@ -11,8 +12,8 @@ namespace NeonTetra.Contracts.Infrastructure
         OperatingSystem OSVersion { get; set; }
         int ProcessorCount { get; set; }
         bool Is64BitProcess { get; set; }
-        double Lat { get; set; }
-        double Lon { get; set; }
+
+        ILocation Location { get; set; }
         DateTime? Sunrise { get; set; }
         DateTime? Sunrset { get; set; }
     }

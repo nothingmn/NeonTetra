@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DryIoc;
 using DryIoc.Microsoft.DependencyInjection;
 using Hangfire;
+using Hangfire.Dashboard;
 using Hangfire.MySql.Core;
 using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Builder;
@@ -18,12 +19,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NeonTetra.Contracts;
 using NeonTetra.Contracts.Infrastructure;
+using NeonTetraWebApi.Scheduling;
 
 namespace NeonTetraWebApi
 {
     public class Startup
     {
         public static JobActivator JobActivator { get; set; }
+        public static IDeployment Deployment { get; set; }
 
         public Startup(IConfiguration configuration)
         {
@@ -80,7 +83,13 @@ namespace NeonTetraWebApi
             app.UseRouting();
             app.UseAuthorization();
 
-            app.UseHangfireDashboard("/schedule");
+            app.UseHangfireDashboard("/schedule", new DashboardOptions()
+            {
+                Authorization = new[]
+                {
+                    new CustomHangfireAuthorizationFilter(Deployment.Container)
+                }
+            });
 
             app.UseEndpoints(endpoints =>
             {

@@ -88,6 +88,10 @@ namespace NeonTetra.DI.Containers
             container.Register<IHashProvider, MD5Hash>("MD5");
             container.Register<IHashProvider, Murmur3>();
 
+            container.Register<IGeoPoint, GeoPoint>();
+            container.Register<ILocation, Location>();
+            container.Register<IGeoFence, GeoFence>();
+
             RegisterActorMessageTypes(container);
             RegisterJobs(container);
         }

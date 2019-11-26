@@ -23,10 +23,10 @@ namespace NeonTetra.Core.Jobs
 
         public void UpdateServerProperties()
         {
-            if (_server.Lat != 0 && _server.Lon != 0)
+            if (_server.Location.Lat.Point != 0 && _server.Location.Lon.Point != 0)
             {
-                _server.Sunrise = _sunriseSunSet.GetSunrise(_server.Lat, _server.Lon);
-                _server.Sunrset = _sunriseSunSet.GetSunset(_server.Lat, _server.Lon);
+                _server.Sunrise = _sunriseSunSet.GetSunrise(_server.Location.Lat.Point, _server.Location.Lon.Point);
+                _server.Sunrset = _sunriseSunSet.GetSunset(_server.Location.Lat.Point, _server.Location.Lon.Point);
             }
         }
     }
