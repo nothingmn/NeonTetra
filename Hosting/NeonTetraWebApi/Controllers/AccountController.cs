@@ -10,13 +10,13 @@ namespace NeonTetraWebApi.Controllers
 {
     [Route("api/[controller]/{id?}")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AccountController : ControllerBase
     {
-        private readonly IUserManager _userManager;
+        private readonly IAccountManager _authManager;
 
-        public AuthController(IUserManager userManager)
+        public AccountController(IAccountManager authManager)
         {
-            _userManager = userManager;
+            _authManager = authManager;
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace NeonTetraWebApi.Controllers
         [HttpPost]
         public async Task<IUser> Post(string username, string password)
         {
-            return await _userManager.Login(username, password);
+            return await _authManager.Login(username, password);
         }
 
         /// <summary>
@@ -46,10 +46,10 @@ namespace NeonTetraWebApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete]
-        public async Task<IUser> Delete(string id)
-        {
-            return await _userManager.Logout(id);
-        }
+        //[HttpDelete]
+        //public async Task<IUser> Delete(string id)
+        //{
+        //    return await _userManager.Logout(id);
+        //}
     }
 }

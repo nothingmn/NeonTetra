@@ -21,6 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="App_Data\Users\rootusers.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Configuration.hocon">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

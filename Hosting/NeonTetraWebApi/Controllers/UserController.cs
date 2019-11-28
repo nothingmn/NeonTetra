@@ -29,10 +29,6 @@ namespace NeonTetraWebApi.Controllers
         [HttpGet]
         public async Task<IUser> Get(string id)
         {
-            _scheduler.Enqueue(() =>
-               _loggingJob.Information(this.GetType(), $"User Controller get by id {id}")
-            );
-
             return await _userManager.Get(id);
         }
     }

@@ -65,6 +65,8 @@ namespace NeonTetra.DI.Containers
             container.Register<IDecrypter, BasicEncryption>();
             container.Register<IEncryptionKeyReadProvider, ConfigurationBasedEncryptionKeyProvider>();
             container.Register<IEncryptionKey, EncryptionKey>();
+            container.Register<IRandomProvider, CoreRandomProvider>();
+
             container.Register<IValidateEncryptionKeys, ValidateEncryptionKeys>();
 
             container.RegisterSingleton<IVersionProvider, AssemblyInfoVersionProvider>();
@@ -84,13 +86,16 @@ namespace NeonTetra.DI.Containers
 
             container.Register<IDomainDataLoader, DomainDataLoader>();
             container.Register<IUser, User>();
+            container.Register<IAccountManager, CoreAccountManager>();
             container.Register<IHashProvider, Murmur3>("MURMUR3");
             container.Register<IHashProvider, MD5Hash>("MD5");
             container.Register<IHashProvider, Murmur3>();
+            container.Register<IHash, WellKnownHashProvider>();
 
             container.Register<IGeoPoint, GeoPoint>();
             container.Register<ILocation, Location>();
             container.Register<IGeoFence, GeoFence>();
+            container.Register<IGeoFenceEdgeDetection, BasicGeoFenceEdgeDetection>();
 
             RegisterActorMessageTypes(container);
             RegisterJobs(container);

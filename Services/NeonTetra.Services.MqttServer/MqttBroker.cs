@@ -14,16 +14,13 @@ namespace NeonTetra.Services.MqttServer
 {
     public class MqttBroker
     {
-        private IHashProvider _userHashProvider;
+        private IAccountManager _accountManager;
         private IMqttServer _server;
-        private IList<IUser> _users;
 
-        public async Task StartAsync(IHashProvider userHashProvider, int port = 1889, IList<IUser> users = null)
+        public async Task StartAsync(IAccountManager accountManager, int port = 1889)
         {
-            _users = users;
-            _userHashProvider = userHashProvider;
             var options = ConfigBroker(port);
-
+            _accountManager = accountManager;
             _server = new MqttFactory().CreateMqttServer();
             await _server.StartAsync(options);
         }
@@ -33,17 +30,6 @@ namespace NeonTetra.Services.MqttServer
             await _server.StopAsync();
         }
 
-        private bool ValidateUser(string username, string password)
-        {
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)) return false;
-            var user = (from u in _users where u.UserName.Equals(username) select u)?.FirstOrDefault();
-            if (user == null) return false;
-            if (string.IsNullOrEmpty(user.Password)) return false;
-            var hashedPassword = System.Convert.ToBase64String(_userHashProvider.Hash(System.Text.Encoding.UTF8.GetBytes(password)));
-            if (hashedPassword.Equals(user.Password)) return true;
-            return false;
-        }
-
         private IMqttServerOptions ConfigBroker(int port = 1889)
         {
             var optionsBuilder = new MqttServerOptionsBuilder()
@@ -51,13 +37,11 @@ namespace NeonTetra.Services.MqttServer
                 .WithDefaultEndpointPort(port)
                 .WithConnectionValidator(c =>
                 {
-                    if (!ValidateUser(c.Username, c.Password))
+                    c.ReasonCode = MqttConnectReasonCode.BadUserNameOrPassword;
+                    var userAccount = (_accountManager.Login(c.Username, c.Password))?.Result;
+                    if (userAccount != null)
                     {
-                        c.ReturnCode = MqttConnectReturnCode.ConnectionRefusedBadUsernameOrPassword;
-                    }
-                    else
-                    {
-                        c.ReturnCode = MqttConnectReturnCode.ConnectionAccepted;
+                        c.ReasonCode = MqttConnectReasonCode.Success;
                     }
                 });
 

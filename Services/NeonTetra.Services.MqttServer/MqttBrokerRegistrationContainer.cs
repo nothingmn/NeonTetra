@@ -18,22 +18,13 @@ namespace NeonTetra.Services.MqttServer
 
         public async Task ExecutePostRegistrationStep(IDIContainer container, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var rootUser = container.Resolve<IUser>();
-            rootUser.Id = "root";
-            rootUser.Name = "Root";
-            rootUser.UserName = "root";
-            var hashProvider = container.Resolve<IHashProvider>();
-
-            rootUser.Password = System.Convert.ToBase64String(hashProvider.Hash(System.Text.Encoding.UTF8.GetBytes("root")));
-
-            var users = new List<IUser>() { rootUser };
             var config = container.Resolve<IConfiguration>();
             var enabled = config.GetValueOrDefault("MQTT:Server:Enabled", true);
             if (enabled)
             {
                 var port = config.GetValueOrDefault("MQTT:Server:Port", 1889);
                 var broker = new MqttBroker();
-                await broker.StartAsync(hashProvider, port, users);
+                await broker.StartAsync(container.Resolve<IAccountManager>(), port);
                 container.RegisterInstance(broker);
             }
         }

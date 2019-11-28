@@ -8,11 +8,13 @@ namespace NeonTetra.Contracts.Services
     public enum Edges
     {
         Leading,   //The leading edge (or front edge) is the first edge of the pulse.
-        Trailing   //The trailing edge (or back edge) is the second edge of the pulse.
+        Trailing,   //The trailing edge (or back edge) is the second edge of the pulse.
+        None
     }
 
     public interface IGeoFenceEdgeDetection
     {
+        Edges DetectedEdge(bool currentState, bool nextState);
     }
 
     public interface IGeoFenceDetection
